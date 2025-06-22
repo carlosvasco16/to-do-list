@@ -1,66 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 📝 To-Do List API – Laravel 10
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-10.x-red?logo=laravel)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![PHP](https://img.shields.io/badge/PHP-8.1%2B-blue?logo=php)
+![Status](https://img.shields.io/badge/status-Finalizado-brightgreen)
+![Build](https://img.shields.io/badge/testes-PASSING-success)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+API RESTful desenvolvida em Laravel para gerenciar tarefas pessoais com autenticação, validações, testes e documentação Swagger.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ⚙️ Como configurar o projeto
 
-## Learning Laravel
+1. Clone o repositório:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+git clone https://github.com/carlosvasco16/to-do-list.git
+cd to-do-list
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Copie o arquivo de ambiente:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+cp .env.example .env
+```
 
-## Laravel Sponsors
+3. Configure o banco de dados no `.env`:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+DB_DATABASE=to_do_list
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-### Premium Partners
+4. Instale as dependências:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+composer install
+```
 
-## Contributing
+5. Gere a chave da aplicação:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan key:generate
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🗃️ Como rodar as migrations
 
-## Security Vulnerabilities
+```bash
+php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Ou para recriar tudo:
 
-## License
+```bash
+php artisan migrate:fresh
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🚀 Como executar o servidor local
+
+```bash
+php artisan serve
+```
+
+A aplicação estará disponível em:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 🧪 Como testar a API
+
+Você pode usar Postman ou `curl`.
+
+### 📌 Registro
+`POST /api/register`
+
+```json
+{
+  "name": "Carlos",
+  "email": "carlos@email.com",
+  "password": "123456",
+  "password_confirmation": "123456"
+}
+```
+
+### 🔐 Login
+`POST /api/login`
+
+```json
+{
+  "email": "carlos@email.com",
+  "password": "123456"
+}
+```
+
+> Copie o token retornado e use no cabeçalho:  
+`Authorization: Bearer {TOKEN}`
+
+### 📋 Criar Tarefa
+`POST /api/tasks`
+
+```json
+{
+  "title": "Estudar Laravel",
+  "description": "Finalizar desafio"
+}
+```
+
+### 📃 Listar Tarefas
+`GET /api/tasks`
+
+### 🎯 Atualizar Status
+`PATCH /api/tasks/{id}/status`
+
+```json
+{
+  "status": "completed"
+}
+```
+
+### 🗑️ Deletar Tarefa
+`DELETE /api/tasks/{id}`
+
+---
+
+## 📚 Documentação Swagger
+
+Gere com:
+
+```bash
+php artisan l5-swagger:generate
+```
+
+Acesse em:  
+[http://127.0.0.1:8000/api/documentation](http://127.0.0.1:8000/api/documentation)
+
+---
+
+## ✅ Funcionalidades implementadas
+
+- Autenticação com Laravel Sanctum
+- Cadastro/Login/Logout
+- CRUD de Tarefas
+- Filtro por status
+- Testes automatizados com PHPUnit
+- Documentação com Swagger
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Carlos Vasco**  
+📌 Angola · 💻 Laravel · 🔐 Backend APIs
